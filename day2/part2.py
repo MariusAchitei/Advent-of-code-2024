@@ -1,19 +1,14 @@
 def main():
-    matrix = list()
-    input_file = open("input.txt", "r")
-    for line in input_file:
-        parts = line.split(" ")
-        parts = [int(elem) for elem in parts]
-        matrix.append(parts)
-
-
-    safe = 0
-    for line in matrix:
-        if check_line_skip1(line):
-            safe+=1
-
+    matrix = read_matrix("input.txt")
+    safe = count_safe_lines(matrix, check_line_skip1)
     print(safe)
 
+def read_matrix(file_path):
+    with open(file_path, "r") as input_file:
+        return [list(map(int, line.split())) for line in input_file]
+
+def count_safe_lines(matrix, check_function):
+    return sum(1 for line in matrix if check_function(line))
 
 def check_line_skip1(line):
     if check_line(line):

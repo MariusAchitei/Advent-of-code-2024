@@ -1,29 +1,23 @@
 def main():
-    matrix = list()
-    input_file = open("1/input.txt", "r")
-    for line in input_file:
-        parts = line.split(" ")
-        parts = [int(elem) for elem in parts]
-        matrix.append(parts)
-
-
-    safe = 0
-    for line in matrix:
-        if  len(line) <= 3:
-            print (line)
-        if check_line(line):
-            # print(line)
-            safe+=1
-
+    matrix = read_matrix("input.txt")
+    safe = count_safe_lines(matrix, check_line)
     print(safe)
+
+def read_matrix(file_path):
+    with open(file_path, "r") as input_file:
+        return [list(map(int, line.split())) for line in input_file]
+
+def count_safe_lines(matrix, check_function):
+    return sum(1 for line in matrix if check_function(line))
 
 
 def check_line(line):
     sgn = (line[0] - line[1]) > 0
     for i in range(1, len(line)):
-        if abs(line[i - 1] - line[i]) > 3 or abs(line[i - 1] - line[i]) < 1:
+        difference = line[i - 1] - line[i]
+        if abs(difference) > 3 or abs(difference) < 1:
             return  False
-        if (line[i - 1] - line[i] > 0) != sgn:
+        if (difference > 0) != sgn:
             return False
 
     return True
