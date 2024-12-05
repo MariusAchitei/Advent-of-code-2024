@@ -9,27 +9,29 @@ def main():
 
     safe = 0
     for line in matrix:
-        if  len(line) <= 3:
-            print (line)
-        if check_line(line):
-            # print(line)
+        if check_line_skip1(line):
             safe+=1
 
     print(safe)
 
 
+def check_line_skip1(line):
+    if check_line(line):
+        return True
+    for i in range(len(line)):
+        if check_line(line[:i] + line[i + 1:]):
+            return True
+    return False
+
+
 def check_line(line):
-    fail = 0
     sgn = (line[0] - line[1]) > 0
     for i in range(1, len(line)):
-        if abs(line[i - 1] - line[i]) > 3 or abs(line[i - 1] - line[i]) < 1:
-            fail += 1
-        elif (line[i - 1] - line[i] > 0) != sgn:
-            fail += 1
-    if fail < 2:
-        return True
-    else:
-        return False
-
+        difference = line[i - 1] - line[i]
+        if abs(difference) > 3 or abs(difference) < 1:
+            return False
+        if (difference > 0) != sgn:
+            return False
+    return True
 
 main()
