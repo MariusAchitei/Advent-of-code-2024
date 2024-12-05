@@ -21,7 +21,6 @@ def main():
     matrix = []
     input_file = open("input.txt", "r")
     for line in input_file:
-        # Print each line
         char_arr = []
         char_arr.extend(line.strip())
         matrix.append(char_arr)

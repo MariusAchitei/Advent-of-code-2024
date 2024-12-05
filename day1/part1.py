@@ -1,7 +1,7 @@
 def main():
     left = list()
     right = list()
-    input_file = open("input.txt", "r")
+    input_file = open("1/input.txt", "r")
     for line in input_file:
         line = line.replace("   ", " ")
         parts = line.split(" ")

@@ -1,6 +1,6 @@
 def main():
     matrix = list()
-    input_file = open("input.txt", "r")
+    input_file = open("1/input.txt", "r")
     for line in input_file:
         parts = line.split(" ")
         parts = [int(elem) for elem in parts]

@@ -27,7 +27,7 @@ def process_input(line):
     print(sum)
 
 def main():
-    input_file = open("input.txt", "r")
+    input_file = open("1/input.txt", "r")
     lines = list()
     for line in input_file:
         lines.append(line)
