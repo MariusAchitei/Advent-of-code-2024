@@ -27,16 +27,13 @@ def is_obstacle(i, j, direction):
 a = set()
 
 
-def print_cursor(i, j, direction):
+def move_cursor(i, j, direction):
     matrix[i][j] = direction["self"]
 
 
 def move_cursor_game():
     i, j, direction =  find_cursor()
     while is_inside_matrix(i, j):
-        print(i, j)
-        print(len(a))
-
         (i, j, direction) = find_cursor()
         nexti, nextj = direction["move"](i, j)
         if not is_inside_matrix(nexti, nextj):
@@ -48,8 +45,7 @@ def move_cursor_game():
             oldi, oldj = i, j
             i, j = direction["move"](i, j)
             matrix[oldi][oldj] = "X"
-        print_cursor(i, j, direction)
-        # a.add((i, j))
+        move_cursor(i, j, direction)
 def main():
     input_file = open("input.txt", "r")
     for line in input_file:
@@ -57,10 +53,6 @@ def main():
         char_arr.extend(line.strip())
         matrix.append(char_arr)
     move_cursor_game()
-
-    for line in matrix:
-        print (line)
-    print("".join(sum(matrix, [])))
     print("".join(sum(matrix, [])).count("X"))
 
 
